@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "789663447473",
+    "project_id": "karasassignment",
+    "storage_bucket": "karasassignment.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789663447473:android:a41257abd4c1c250152590",
+        "android_client_info": {
+          "package_name": "hk.karasshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "789663447473-dp8rt5q4adi2sdqp60d5j4ldadbs8v9g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hk.karasshop",
+            "certificate_hash": "ad5589cd3380f1e1026de9ee9795d7086214fe5d"
+          }
+        },
+        {
+          "client_id": "789663447473-vlpumvs90998b0679f0vcot7chip3vrh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3xXhJh2xfWd1c83DyCGRm0FRDNnbrNB8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "789663447473-vlpumvs90998b0679f0vcot7chip3vrh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
