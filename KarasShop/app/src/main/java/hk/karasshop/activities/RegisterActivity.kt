@@ -1,16 +1,19 @@
 package hk.karasshop.activities
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.WindowManager
-import androidx.core.content.ContextCompat
-import com.google.android.material.snackbar.Snackbar
+import android.widget.Toast
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import hk.karasshop.R
+import hk.karasshop.firestore.FirestoreClass
+import hk.karasshop.models.User
 import kotlinx.android.synthetic.main.activity_register.*
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
@@ -20,12 +23,13 @@ class RegisterActivity : AppCompatActivity() {
         );
         setupActionBar();
         tv_login.setOnClickListener {
-            val intent = Intent(this@RegisterActivity, LoginActivity::class.java);
-            startActivity(intent);
-            finish();
+            onBackPressed();
+//            val intent = Intent(this@RegisterActivity, LoginActivity::class.java);
+//            startActivity(intent);
+//            finish();
         }
         btn_register.setOnClickListener {
-            validateRegisterDetails()
+            registerUser()
         }
     }
 
@@ -80,27 +84,52 @@ class RegisterActivity : AppCompatActivity() {
                 false
             }
             else -> {
-                showErrorSnackBar(resources.getString(R.string.registration_success), false)
+                //showErrorSnackBar(resources.getString(R.string.registration_success), false)
                 true
             }
         }
     }
 
-    private fun showErrorSnackBar(message: String, errorMessage: Boolean) {
-        val snackBar =
-            Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
-        val snackBarView = snackBar.view;
-        if (errorMessage) {
-            snackBarView.setBackgroundColor(
-                ContextCompat.getColor(this@RegisterActivity, R.color.colorSnackBarError)
-            );
-        } else {
-            snackBarView.setBackgroundColor(
-                ContextCompat.getColor(
-                    this@RegisterActivity, R.color.colorSnackBarSuccess
-                )
-            );
+    private fun registerUser() {
+        if (validateRegisterDetails()) {
+            showProgressDialog(resources.getString(R.string.please_wait));
+            val email: String = et_email.text.toString().trim { it <= ' ' }
+            val password: String = et_password.text.toString().trim { it <= ' ' }
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(
+                    OnCompleteListener<AuthResult> { task ->
+                        //hideProgressDialog()
+                        if (task.isSuccessful) {
+                            val firebaseUser: FirebaseUser = task.result!!.user!!
+                            val user = User(
+                                firebaseUser.uid,
+                                et_first_name.text.toString().trim { it <= ' ' },
+                                et_last_name.text.toString().trim { it <= ' ' },
+                                et_email.text.toString().trim { it <= ' ' }
+                            )
+                            FirestoreClass().registerUser(this@RegisterActivity, user)
+//                            showErrorSnackBar(
+//                                resources.getString(R.string.registration_success) + " Your user id is ${firebaseUser.uid}",
+//                                false
+//                            )
+//                            FirebaseAuth.getInstance().signOut();
+//                            finish();
+                        } else {
+                            hideProgressDialog()
+                            showErrorSnackBar(task.exception!!.message.toString(), true)
+                        }
+                    })
         }
-        snackBar.show();
+    }
+
+    fun userRegistrationSuccess() {
+        hideProgressDialog()
+        Toast.makeText(
+            this@RegisterActivity,
+            resources.getString(R.string.registration_success),
+            Toast.LENGTH_SHORT
+        ).show()
+        FirebaseAuth.getInstance().signOut()
+        finish()
     }
 }
