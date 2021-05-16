@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
-    tools:context=".activities.UserProfileActivity">
+    tools:context=".ui.activities.UserProfileActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_user_profile_activity"
@@ -207,7 +207,7 @@
             </RadioGroup>
 
             <hk.karasshop.utils.MSPButton
-                android:id="@+id/btn_submit"
+                android:id="@+id/btn_save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

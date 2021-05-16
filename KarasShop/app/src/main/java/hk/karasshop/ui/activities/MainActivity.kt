@@ -1,4 +1,4 @@
-package hk.karasshop.activities
+package hk.karasshop.ui.activities
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity

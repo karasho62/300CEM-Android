@@ -1,4 +1,4 @@
-package hk.karasshop.activities
+package hk.karasshop.ui.activities
 
 import android.content.Intent
 import android.os.Build
@@ -8,6 +8,7 @@ import android.os.Handler
 import android.view.WindowInsets
 import android.view.WindowManager
 import hk.karasshop.R
+import hk.karasshop.firestore.FirestoreClass
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,11 +26,17 @@ class SplashActivity : AppCompatActivity() {
         }
 
         @Suppress("DEPRECATION")
-        Handler().postDelayed({
-            startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
-            finish()
-        }, 1000)
-//        val typeface:Typeface=Typeface.createFromAsset(assets,"msyhbd.ttf");
-//        tv_app_name.typeface=typeface;
+        Handler().postDelayed(
+            {
+                val currentUserID = FirestoreClass().getCurrentUserID()
+                if (currentUserID.isNotEmpty()) {
+                    startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
+                } else {
+                    startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+                }
+                finish()
+            },
+            1000
+        )
     }
 }

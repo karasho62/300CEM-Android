@@ -1,4 +1,4 @@
-package hk.karasshop.activities
+package hk.karasshop.ui.activities
 
 import android.os.Bundle
 import android.text.TextUtils
