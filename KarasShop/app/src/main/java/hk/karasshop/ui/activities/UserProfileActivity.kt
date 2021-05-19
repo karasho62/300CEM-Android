@@ -78,38 +78,17 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
                     }
                 }
                 R.id.btn_save -> {
-                    showProgressDialog(resources.getString(R.string.please_wait))
-                    FirestoreClass().uploadImageToCloudStorage(
-                        this@UserProfileActivity,
-                        mSelectedImageFileUri
-                    )
                     if (validateUserProfileDetails()) {
                         showProgressDialog(resources.getString(R.string.please_wait))
                         if (mSelectedImageFileUri != null) {
                             FirestoreClass().uploadImageToCloudStorage(
                                 this@UserProfileActivity,
-                                mSelectedImageFileUri
+                                mSelectedImageFileUri,
+                                Constants.USER_PROFILE_IMAGE
                             )
                         } else {
                             updateUserProfileDetails()
                         }
-                        /*val userHashMap = HashMap<String, Any>()
-                        val mobileNumber = et_mobile_number.text.toString().trim { it <= ' ' }
-                        val gender = if (rb_male.isChecked) {
-                            Constants.MALE
-                        } else {
-                            Constants.FEMALE
-                        }
-                        if (mobileNumber.isNotEmpty()) {
-                            userHashMap[Constants.MOBILE] = mobileNumber.toLong()
-                        }
-                        userHashMap[Constants.GENDER] = gender
-                        showProgressDialog(resources.getString(R.string.please_wait))
-                        FirestoreClass().updateUserProfileData(
-                            this@UserProfileActivity,
-                            userHashMap
-                        )*/
-                        //showErrorSnackBar("Your details are valid. You can update them.",false)
                     }
                 }
             }

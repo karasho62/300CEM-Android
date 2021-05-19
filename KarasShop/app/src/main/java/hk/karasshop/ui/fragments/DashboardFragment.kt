@@ -3,16 +3,14 @@ package hk.karasshop.ui.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import hk.karasshop.R
 import hk.karasshop.firestore.FirestoreClass
 import hk.karasshop.models.Product
+import hk.karasshop.ui.activities.ProductDetailsActivity
 import hk.karasshop.ui.activities.SettingsActivity
 import hk.karasshop.ui.adapters.DashboardItemsListAdapter
+import hk.karasshop.utils.Constants
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 class DashboardFragment : BaseFragment() {
@@ -66,6 +64,15 @@ class DashboardFragment : BaseFragment() {
             rv_dashboard_items.setHasFixedSize(true)
             val adapter = DashboardItemsListAdapter(requireActivity(), dashboardItemsList)
             rv_dashboard_items.adapter = adapter
+            adapter.setOnClickListener(object :
+                DashboardItemsListAdapter.OnClickListener {
+                override fun onClick(position: Int, product: Product) {
+                    val intent = Intent(context, ProductDetailsActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_PRODUCT_ID, product.product_id)
+                    intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, product.user_id)
+                    startActivity(intent)
+                }
+            })
         } else {
             rv_dashboard_items.visibility = View.GONE
             tv_no_dashboard_items_found.visibility = View.VISIBLE

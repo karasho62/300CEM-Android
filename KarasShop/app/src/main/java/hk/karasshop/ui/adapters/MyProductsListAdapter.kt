@@ -1,13 +1,16 @@
 package hk.karasshop.ui.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import hk.karasshop.R
 import hk.karasshop.models.Product
+import hk.karasshop.ui.activities.ProductDetailsActivity
 import hk.karasshop.ui.fragments.ProductsFragment
+import hk.karasshop.utils.Constants
 import hk.karasshop.utils.GlideLoader
 import kotlinx.android.synthetic.main.item_list_layout.view.*
 
@@ -35,6 +38,12 @@ open class MyProductsListAdapter(
             holder.itemView.tv_item_price.text = "$${model.price}"
             holder.itemView.ib_delete_product.setOnClickListener {
                 fragment.deleteProduct(model.product_id)
+            }
+            holder.itemView.setOnClickListener {
+                val intent = Intent(context, ProductDetailsActivity::class.java)
+                intent.putExtra(Constants.EXTRA_PRODUCT_ID, model.product_id)
+                intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, model.user_id)
+                context.startActivity(intent)
             }
         }
     }
