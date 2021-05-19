@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import hk.karasshop.R
 import hk.karasshop.firestore.FirestoreClass
 import hk.karasshop.models.Product
+import hk.karasshop.ui.activities.CartListActivity
 import hk.karasshop.ui.activities.ProductDetailsActivity
 import hk.karasshop.ui.activities.SettingsActivity
 import hk.karasshop.ui.adapters.DashboardItemsListAdapter
@@ -39,6 +40,10 @@ class DashboardFragment : BaseFragment() {
         when (id) {
             R.id.action_settings -> {
                 startActivity(Intent(activity, SettingsActivity::class.java))
+                return true
+            }
+            R.id.action_cart -> {
+                startActivity(Intent(activity, CartListActivity::class.java))
                 return true
             }
         }
