@@ -320,8 +320,7 @@ class AddEditAddressActivity : BaseActivity() {
         var areaName = ""
         var geoCoder = Geocoder(this, Locale.getDefault())
         var address = geoCoder.getFromLocation(lat, long, 1)
-        //areaName = address.get(0).featureName//number
-        areaName = address.get(0).thoroughfare//number
+        areaName = address.get(0).thoroughfare
         return areaName
     }
 }
