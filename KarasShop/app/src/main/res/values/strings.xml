@@ -135,4 +135,7 @@
     <string name="lbl_payment_mode">Payment Mode</string>
     <string name="lbl_cash_on_delivery">Cash On Delivery</string>
     <string name="btn_lbl_place_order">PLACE ORDER</string>
+    <string name="btn_lbl_google_map">Map Address</string>
+    <string name="google_map_denied">You have denied map function</string>
+    <string name="google_map_enabled">Please enable map function</string>
 </resources>

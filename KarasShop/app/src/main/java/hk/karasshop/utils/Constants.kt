@@ -20,6 +20,9 @@ object Constants {
     const val EXTRA_ADDRESS_DETAILS: String = "AddressDetails"
     const val EXTRA_SELECT_ADDRESS: String = "extra_select_address"
     const val EXTRA_SELECTED_ADDRESS: String = "extra_selected_address"
+    const val INTERNET_CODE = 2
+    const val ACCESS_FINE_LOCATION_CODE = 2
+    const val ACCESS_COARSE_LOCATION_CODE = 2
     const val READ_STORAGE_PERMISSION_CODE = 2
     const val PICK_IMAGE_REQUEST_CODE = 2
     const val DEFAULT_CART_QUANTITY: String = "1"
@@ -34,7 +37,7 @@ object Constants {
     const val USER_ID: String = "user_id"
     const val PRODUCT_ID: String = "product_id"
     const val COMPLETE_PROFILE: String = "profileCompleted"
-    const val USER_PROFILE_IMAGE:String = "User_Profile_Image"
+    const val USER_PROFILE_IMAGE: String = "User_Profile_Image"
     const val PRODUCT_IMAGE: String = "Product_Image"
     const val CART_QUANTITY: String = "cart_quantity"
     const val HOME: String = "Home"
@@ -47,6 +50,7 @@ object Constants {
         )
         activity.startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST_CODE)
     }
+
     fun getFileExtension(activity: Activity, uri: Uri?): String? {
         return MimeTypeMap.getSingleton()
             .getExtensionFromMimeType(activity.contentResolver.getType(uri!!))
