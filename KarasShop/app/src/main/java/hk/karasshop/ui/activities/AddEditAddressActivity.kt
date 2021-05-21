@@ -2,6 +2,7 @@ package hk.karasshop.ui.activities
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.LocationManager
@@ -70,6 +71,8 @@ class AddEditAddressActivity : BaseActivity() {
             saveAddressToFirestore()
         }
         btn_google_map.setOnClickListener {
+            //val intent = Intent(this@AddEditAddressActivity, MapsActivity::class.java)
+            //startActivity(intent)
             getLastLocation()
         }
     }
